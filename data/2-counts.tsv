@@ -1,0 +1,147 @@
+predicate	count	predicateLabel
+P749	17169	parent organization
+P463	15988	member of
+P355	13458	child organization/unit
+P1416	3791	affiliation
+P361	2990	part of
+P159	2049	headquarters location
+P131	1840	located in the administrative territorial entity
+P127	1307	owned by
+P8324	1143	funder
+P527	1080	has part(s)
+P1889	972	different from
+P137	797	operator
+P2652	647	partnership with
+P1830	420	owner of
+P5514	417	accredited by
+P1891	410	signatory
+P112	347	founded by
+P1365	321	replaces
+P1366	303	replaced by
+P859	292	sponsor
+P6379	237	has works in the collection
+P47	185	shares border with
+P10624	185	official observer status in organization
+P276	169	location
+P414	168	stock exchange
+P485	142	archives at
+P140	124	religion or worldview
+P797	106	authority
+P7888	89	merged into
+P156	87	followed by
+P155	86	follows
+P1001	81	applies to jurisdiction
+P710	80	participant
+P807	78	separated from
+P241	71	military branch
+P740	55	location of formation
+P126	50	maintained by
+P31	47	instance of
+P17	46	country
+P138	44	named after
+P150	33	contains the administrative territorial entity
+P2541	30	operating area
+P199	29	organizational divisions
+P121	26	item operated
+P190	22	twinned administrative body
+P790	19	approved by
+P1875	19	represented by
+P460	18	said to be the same as
+P4330	17	contains
+P84	16	architect
+P466	15	occupant
+P2770	15	source of income
+P1454	14	legal form
+P1951	14	investor
+P3032	13	adjacent building
+P193	13	main building contractor
+P1343	13	described by source
+P5353	11	school district
+P912	11	has facility
+P279	10	subclass of
+P8571	8	external auditor
+P123	8	publisher
+P767	8	contributor to the creative work or subject
+P631	7	structural engineer
+P3719	7	regulated by
+P737	6	influenced by
+P1268	6	represents
+P553	6	website account on
+P88	6	commissioned by
+P921	5	main subject
+P1535	5	used by
+P1344	5	participant in
+P3842	5	located in the present-day administrative territorial entity
+P7153	4	significant place
+P1716	4	brand
+P1056	4	product or material produced
+P530	4	diplomatic relation
+P176	4	manufacturer
+P2650	4	interested in
+P1547	4	depends on software
+P1424	3	topic has template
+P2389	3	organization directed by the office or position
+P664	3	organizer
+P1327	3	partner in business or sport
+P194	3	legislative body
+P114	3	airline alliance
+P6275	3	copyright representative
+P166	3	award received
+P4791	3	commanded by
+P7604	2	supervised by
+P1398	2	structure replaces
+P1840	2	investigated by
+P2789	2	connects with
+P2813	2	house publication
+P1269	2	facet of
+P36	2	capital
+P8786	2	dedicated heritage entity
+P1037	2	director / manager
+P611	2	religious order
+P167	2	structure replaced by
+P748	2	appointed by
+P1382	2	partially coincident with
+P941	2	inspired by
+P12452	2	appeals to
+P937	2	work location
+P708	2	diocese
+P8464	2	content partnership category
+P108	2	employer
+P945	2	allegiance
+P101	2	field of work
+P451	1	unmarried partner
+P10527	1	documentation files at
+P144	1	based on
+P501	1	enclave within
+P10611	1	has certification
+P1028	1	donated by
+P11812	1	afterward owned by
+P1376	1	capital of
+P11814	1	funded by grant
+P263	1	official residence
+P3501	1	Christian liturgical rite
+P170	1	creator
+P4969	1	derivative work
+P669	1	located on street
+P706	1	located in/on physical feature
+P2388	1	position held by head of the organization
+P2868	1	subject has role
+P2360	1	intended public
+P6195	1	funding scheme
+P931	1	place served by transport hub
+P1027	1	conferred by
+P209	1	highest judicial authority
+P208	1	executive body
+P69	1	educated at
+P9901	1	issuing agent of work
+P2937	1	parliamentary term
+P115	1	home venue
+P8001	1	endorsed by
+P61	1	discoverer or inventor
+P5995	1	kit supplier
+P3113	1	does not have part
+P6840	1	student organization of
+P275	1	copyright license
+P178	1	developer
+P2851	1	payment types accepted
+P9239	1	affiliated worker organisation
