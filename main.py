@@ -1,3 +1,21 @@
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "click",
+#     "pandas",
+#     "pyobo",
+#     "tqdm",
+#     "wikidata-client",
+# ]
+# ///
+
+"""This script identifies triples in Wikidata that can be incorporated into ROR.
+
+This script is licensed under the MIT license. ROR and Wikidata are both licensed
+under CC0. The data output from this script and stored in this repository
+is also licensed under CC0
+"""
+
 from typing import Literal
 
 import pandas as pd
@@ -45,6 +63,22 @@ def _tr(df: pd.DataFrame) -> set[tuple[str, ...]]:
     return {tuple(row) for row in df[subcolumns].values}
 
 
+curie_to_label = {
+    ("bfo", "0000062"): ("preceded by", None),
+    ("bfo", "0000050"): ("part of", "P361"),
+    ("bfo", "0000051"): ("has part", "P527"),
+    ("bfo", "0000063"): ("precedes", None),
+    # this could be mapped, but not important
+    ("rdfs", "seeAlso"): ("see also", None),
+}
+#: The following Wikidata properties can be suggested back
+#: to ROR
+properties_that_can_be_suggested: set[str] = {
+    wikidata_id
+    for _, wikidata_id in curie_to_label.values()
+    if wikidata_id
+}
+
 columns = [
     "subjectROR",
     "subjectLabel",
@@ -62,7 +96,8 @@ def main() -> None:
     path_2 = DATA.joinpath("2-counts.tsv")
     path_3 = DATA.joinpath("3-wikidata-ror-relations.tsv")
     path_4 = DATA.joinpath("4-ror-relations.tsv")
-    path_5 = DATA.joinpath("5-diff.tsv")
+    path_5 = DATA.joinpath("5-diff-all.tsv")
+    path_6 = DATA.joinpath("5-diff-suggestions.tsv")
 
     if path_3.is_file():
         wd_relations_df = pd.read_csv(path_3, sep="\t")
@@ -142,14 +177,6 @@ def main() -> None:
         # to add to ROR
         ror_relations_df = pyobo.get_relations_df("ror")
         ror_relations_df = ror_relations_df[ror_relations_df["target_ns"] == "ror"]
-        curie_to_label = {
-            ("bfo", "0000062"): ("preceded by", None),
-            ("bfo", "0000050"): ("part of", "P361"),
-            ("bfo", "0000051"): ("has part", "P527"),
-            ("bfo", "0000063"): ("precedes", None),
-            # this could be mapped, but not important
-            ("rdfs", "seeAlso"): ("see also", None),
-        }
 
         ror_relations_df["predicate"] = [
             curie_to_label[tuple(reference_tuple)][1]
@@ -172,6 +199,12 @@ def main() -> None:
     _df_predicate_label(diff_df, labels)
     diff_df = diff_df[columns]
     diff_df.to_csv(path_5, sep="\t", index=False)
+
+    suggestion_df = diff_df[diff_df['predicate'].isin(properties_that_can_be_suggested)]
+    suggestion_df.to_csv(path_6, sep='\t', index=False)
+
+    click.echo(suggestion_df[suggestion_df['subjectLabel'].notna() & suggestion_df['objectLabel'].notna()]
+               .head().to_markdown(tablefmt="github", index=False))
 
 
 if __name__ == "__main__":
