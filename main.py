@@ -74,9 +74,7 @@ curie_to_label = {
 #: The following Wikidata properties can be suggested back
 #: to ROR
 properties_that_can_be_suggested: set[str] = {
-    wikidata_id
-    for _, wikidata_id in curie_to_label.values()
-    if wikidata_id
+    wikidata_id for _, wikidata_id in curie_to_label.values() if wikidata_id
 }
 
 columns = [
@@ -155,7 +153,9 @@ def main() -> None:
                 ORDER BY ?subjectROR ?objectROR
             """)
             tqdm.write(f"running sparql:\n{ror_interaction_sparql}")
-            ror_interaction_df = pd.DataFrame(wikidata_client.query(ror_interaction_sparql))
+            ror_interaction_df = pd.DataFrame(
+                wikidata_client.query(ror_interaction_sparql)
+            )
             ror_interaction_df["predicate"] = predicate
             dfs.append(ror_interaction_df)
 
@@ -170,9 +170,8 @@ def main() -> None:
         wd_relations_df.to_csv(path_3, sep="\t", index=False)
 
     if path_4.is_file():
-        ror_relations_df = pd.read_csv(path_4, sep='\t')
+        ror_relations_df = pd.read_csv(path_4, sep="\t")
     else:
-
         # next step, compare against ROR internal definitions, then make suggestions of relations
         # to add to ROR
         ror_relations_df = pyobo.get_relations_df("ror")
@@ -180,7 +179,9 @@ def main() -> None:
 
         ror_relations_df["predicate"] = [
             curie_to_label[tuple(reference_tuple)][1]
-            for reference_tuple in ror_relations_df[["relation_ns", "relation_id"]].values
+            for reference_tuple in ror_relations_df[
+                ["relation_ns", "relation_id"]
+            ].values
         ]
         ror_relations_df["predicateLabel"] = ror_relations_df["predicate"].map(labels)
         # filter out all relations we don't want to compare to wikidata
@@ -200,11 +201,23 @@ def main() -> None:
     diff_df = diff_df[columns]
     diff_df.to_csv(path_5, sep="\t", index=False)
 
-    suggestion_df = diff_df[diff_df['predicate'].isin(properties_that_can_be_suggested)]
-    suggestion_df.to_csv(path_6, sep='\t', index=False)
+    suggestion_df = diff_df[diff_df["predicate"].isin(properties_that_can_be_suggested)]
+    suggestion_df.to_csv(path_6, sep="\t", index=False)
 
-    click.echo(suggestion_df[suggestion_df['subjectLabel'].notna() & suggestion_df['objectLabel'].notna()]
-               .head().to_markdown(tablefmt="github", index=False))
+    click.echo(
+        suggestion_df[
+            suggestion_df["subjectLabel"].notna() & suggestion_df["objectLabel"].notna()
+        ]
+        .head()
+        .to_markdown(tablefmt="github", index=False)
+    )
+
+    # show NFDI children
+    click.echo(
+        suggestion_df[suggestion_df["objectROR"] == "05qj6w324"].to_markdown(
+            tablefmt="github", index=False
+        )
+    )
 
 
 if __name__ == "__main__":
